@@ -113,7 +113,6 @@ Once this has finished building you can run the image like so from the root of t
 
 ```
 docker run -it -v "$(pwd)":/usr/src/app copybara copybara
-
 ```
 
 A few environment variables exist to allow you to change how you run copybara:
@@ -129,10 +128,10 @@ A few environment variables exist to allow you to change how you run copybara:
   * allows you to specify the sourceref, defaults to none
 
 ```
-docker run
-       -e COPYBARA_CONFIG='other.config.sky'
-       -e COPYBARA_SUBCOMMAND='validate'
-       -v "$(pwd)":/usr/src/app
+docker run \
+       -e COPYBARA_CONFIG='other.config.sky' \
+       -e COPYBARA_SUBCOMMAND='validate' \
+       -v "$(pwd)":/usr/src/app \
        -it copybara copybara
 ```
 
@@ -141,10 +140,10 @@ docker run
 There are a number of ways by which to share your git config and ssh credentials with the docker container, an example with OS X is below:
 
 ```
-docker run
-       -v ~/.ssh:/root/.ssh
-       -v ~/.gitconfig:/root/.gitconfig
-       -v "$(pwd)":/usr/src/app
+docker run \
+       -v ~/.ssh:/root/.ssh \
+       -v ~/.gitconfig:/root/.gitconfig \
+       -v "$(pwd)":/usr/src/app \
        -it copybara copybara
 ```
 
@@ -161,5 +160,9 @@ If you have any questions about how Copybara works please contact us at our [mai
 
 ## Optional tips
 
-  * If you want to see the test errors in Bazel, instead of having to cat the logs, add this line to your `~/.bazelrc: *test --test_output=streamed*`.
+  * If you want to see the test errors in Bazel, instead of having to `cat` the logs, add this line to your `~/.bazelrc`:
+  
+    ```
+    test --test_output=streamed
+    ```
 
